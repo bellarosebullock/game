@@ -1,0 +1,61 @@
+
+PImage bg;
+
+void setup(){
+size(1280,691);
+bg = loadImage("lemons.jpg");
+} 
+
+float ballX = 200;
+float ballY = 100;
+float speedX = 10;
+float speedY = 0;
+int hit = 0;
+int miss = 0;
+
+void draw(){
+  
+  noStroke(); 
+colorMode(HSB, 360, 100,100);
+ 
+float x = 0;
+float y = 0; 
+fill(300);
+
+while(y < height) {
+fill(random(300), random(200), random(100));
+y = y + 40; 
+ }
+x = x + 40;
+
+
+
+
+  float paddle = 100;
+  if(ballX < 0 || ballX > width) speedX =-speedX;
+  if(ballY > height) {
+    speedY = -speedY;
+    float distance = abs(mouseX - ballX);
+    if(distance < paddle) hit += 1;
+    else miss += 1;
+  }
+    else speedY += .1;
+    
+  ballX += speedX;
+  ballY += speedY;
+  
+  //background(bg);
+  noStroke();
+  ellipse(ballX,ballY,100,100);
+
+  rect (mouseX-paddle/2,height-50,2*paddle,100);
+  rect (mouseX-paddle*2,height-50,2*paddle,100);
+
+  text("hit: " + hit, 10, 20);
+  text("miss: " + miss, 10, 40);
+}
+
+void startScreen(int remainingTimeMs) {
+  background(50);
+
+  }
